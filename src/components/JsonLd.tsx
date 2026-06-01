@@ -42,7 +42,7 @@ export function JsonLd() {
           Boolean,
         ),
         founder: { "@id": `${url}#master` },
-        makesOffer: services.map((s) => ({
+        makesOffer: services.items.map((s) => ({
           "@type": "Offer",
           itemOffered: { "@type": "Service", name: s.title, description: s.desc },
         })),

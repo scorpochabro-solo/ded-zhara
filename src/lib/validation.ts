@@ -2,7 +2,7 @@ import { z } from "zod";
 
 /** Каналы связи и услуги — единый источник правды для формы, API и админки. */
 export const CHANNELS = ["phone", "telegram", "max"] as const;
-export const SERVICES = ["classic", "ritual", "gift", "trip"] as const;
+export const SERVICES = ["group", "individual", "spa", "trip"] as const;
 export const STATUSES = ["new", "in_progress", "booked", "done", "rejected"] as const;
 
 export type Channel = (typeof CHANNELS)[number];
@@ -16,10 +16,10 @@ export const CHANNEL_LABELS: Record<Channel, string> = {
 };
 
 export const SERVICE_LABELS: Record<ServiceKind, string> = {
-  classic: "Парение (классическое)",
-  ritual: "Парение «Дед&Жара»",
-  gift: "Подарочный сертификат",
-  trip: "Выезд / экспедиция",
+  group: "Групповое парение",
+  individual: "Индивидуальное парение",
+  spa: "Банное СПА",
+  trip: "Выезд / банный день",
 };
 
 export const STATUS_LABELS: Record<LeadStatus, string> = {

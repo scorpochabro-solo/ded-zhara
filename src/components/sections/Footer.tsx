@@ -59,11 +59,6 @@ export function Footer() {
                   {site.social.vk.label}
                 </a>
               </li>
-              <li>
-                <a href={site.contacts.telegram.href} className="transition-colors hover:text-copper-bright">
-                  {site.contacts.telegram.label} для записи
-                </a>
-              </li>
             </ul>
           </div>
         </div>

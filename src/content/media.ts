@@ -1,66 +1,62 @@
 /**
  * Единый реестр медиа «Дед&Жара».
  *
- * Замена фото на реальное = заменить файл с тем же именем в /public/images
- * ИЛИ поменять путь в одной строке здесь.
- *
- * Сейчас в /public/images лежат СГЕНЕРИРОВАННЫЕ атмосферные плейсхолдеры
- * (тёплый грейдинг, пар, зерно) — без лиц и логотипов. Сгенерировать заново:
- *   npm run gen:media
- *
- * TODO (везде): заменить на реальные фото/видео клиента.
+ * Здесь стоят РЕАЛЬНЫЕ фото Сергея (обработаны из source-photos/ в веб-размеры).
+ * Часть слотов переиспользует одни и те же кадры — Сергей пришлёт ещё фото,
+ * тогда заменим. Замена = положить файл с тем же именем в /public/images
+ * ИЛИ поменять путь здесь.
  */
 
 export type Media = { src: string; alt: string; width?: number; height?: number };
 
 export const media = {
-  // Первый экран — крупный атмосферный кадр пара/парения.
+  // Первый экран — Сергей с пихтовыми вениками у бани.
   hero: {
     src: "/images/hero.jpg",
-    alt: "Пар, дубовый веник и тёплый свет в бане — атмосфера парения",
+    alt: "ПарМастер Сергей «Дед&Жара» с пихтовыми вениками у бани",
     width: 1920,
-    height: 1280,
+    height: 1440,
   } as Media,
 
-  // Карточки услуг.
-  services: {
-    classic: { src: "/images/service-classic.jpg", alt: "Классическое парение веником", width: 900, height: 1100 } as Media,
-    ritual: { src: "/images/service-ritual.jpg", alt: "Полный банный ритуал «Дед&Жара»: дубовый и берёзовый веники", width: 900, height: 1100 } as Media,
-    gift: { src: "/images/service-gift.jpg", alt: "Подарочный сертификат на парение «Пар в Дар»", width: 900, height: 1100 } as Media,
+  // Карточки программ парения (по id программы из copy.ts → services.items).
+  programs: {
+    elements: { src: "/images/hero.jpg", alt: "Парение пихтовыми вениками — программа «4 стихии»", width: 1920, height: 1440 } as Media,
+    taiga: { src: "/images/profile-hvoya.jpg", alt: "Хвоя и аромат тайги — программа «Таёжное»", width: 1000, height: 1333 } as Media,
+    literary: { src: "/images/about-master.jpg", alt: "Спокойное парение под русскую классику — «Литературная гостиная»", width: 1100, height: 1467 } as Media,
+    family: { src: "/images/vyezd-banya.jpg", alt: "Семейное парение с юными банщиками", width: 1100, height: 1467 } as Media,
   },
 
   // Портрет мастера.
   about: {
     src: "/images/about-master.jpg",
-    alt: "Сергей Аперин — пармастер, в войлочной шапке у банной печи",
+    alt: "Сергей Аперин — ПарМастер «Дед&Жара»",
     width: 1100,
-    height: 1320,
+    height: 1467,
   } as Media,
 
   // Выезды.
   trips: {
-    splav: { src: "/images/vyezd-splav.jpg", alt: "Сплав по реке и баня на берегу", width: 1280, height: 900 } as Media,
-    mountains: { src: "/images/vyezd-mountains.jpg", alt: "Горный ретрит: треккинг и баня от пармастера", width: 1280, height: 900 } as Media,
+    splav: { src: "/images/vyezd-splav.jpg", alt: "Сплав по реке с турклубом «9Легенд»", width: 1280, height: 853 } as Media,
+    banya: { src: "/images/vyezd-banya.jpg", alt: "Выездная мобильная баня с гостями на природе", width: 1100, height: 1467 } as Media,
   },
 
-  // Галерея (сетка).
+  // Галерея (масонри). Реальные кадры разных пропорций.
   gallery: [
-    { src: "/images/gallery-1.jpg", alt: "Дубовый веник и пар", width: 900, height: 900 },
-    { src: "/images/gallery-2.jpg", alt: "Банная печь и живой огонь", width: 900, height: 1200 },
-    { src: "/images/gallery-3.jpg", alt: "Войлочная банная шапка на полке", width: 900, height: 900 },
-    { src: "/images/gallery-4.jpg", alt: "Травяной чай после парения", width: 900, height: 1200 },
-    { src: "/images/gallery-5.jpg", alt: "Река и туман на рассвете", width: 900, height: 900 },
-    { src: "/images/gallery-6.jpg", alt: "Горы и звёздное небо в экспедиции", width: 900, height: 1200 },
+    { src: "/images/hero.jpg", alt: "Сергей с пихтовыми вениками у бани", width: 1920, height: 1440 },
+    { src: "/images/profile-hvoya.jpg", alt: "Аромат хвои перед парением", width: 1000, height: 1333 },
+    { src: "/images/vyezd-banya.jpg", alt: "Гости в выездной бане", width: 1100, height: 1467 },
+    { src: "/images/na-beregu.jpg", alt: "Мобильная баня на берегу реки", width: 640, height: 858 },
+    { src: "/images/vyezd-splav.jpg", alt: "Сплав по реке", width: 1280, height: 853 },
+    { src: "/images/camp.jpg", alt: "Лагерь в сосновом лесу на выезде", width: 1280, height: 853 },
   ] as Media[],
 
-  // Видео парения: poster — плейсхолдер, src — реальный файл/ссылку подставить.
+  // Видео парения: пока нет реального — постер-плейсхолдер, src пустой.
   video: {
-    // {{ВИДЕО_ПАРЕНИЕ_URL}} — напр. /videos/parenie.mp4 или внешняя ссылка
     src: "",
     poster: "/images/video-poster.jpg",
     alt: "Видео процесса парения",
   },
 
-  // OG-картинка для соцсетей (1200×630).
-  og: { src: "/images/og.jpg", alt: "Дед&Жара — парение веником", width: 1200, height: 630 } as Media,
+  // OG-картинка для соцсетей (1200×630) — реальное фото мастера.
+  og: { src: "/images/og.jpg", alt: "Дед&Жара — парение веником, Сергей Аперин", width: 1200, height: 630 } as Media,
 };

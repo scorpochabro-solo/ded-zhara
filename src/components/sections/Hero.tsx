@@ -1,61 +1,32 @@
 "use client";
 
-import Image from "next/image";
-import { useRef } from "react";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { hero } from "@/content/copy";
-import { media } from "@/content/media";
 import { staggerContainer, fadeUp, easeWarm } from "@/lib/motion";
 
 export function Hero() {
-  const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  // Лёгкий параллакс фонового фото (выключен при prefers-reduced-motion).
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "16%"]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.12]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
   return (
-    <section
-      ref={ref}
-      className="relative flex min-h-[100svh] items-end overflow-hidden"
-    >
-      {/* Фоновое фото с параллаксом */}
-      <motion.div style={{ y, scale }} className="absolute inset-0 -z-10">
-        <Image
-          // TODO: заменить на реальное фото клиента
-          src={media.hero.src}
-          alt={media.hero.alt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-      </motion.div>
-
-      {/* Тёплые слои затемнения + пар */}
-      <motion.div
-        style={{ opacity: overlayOpacity }}
+    <section className="relative flex min-h-[100svh] items-end overflow-hidden">
+      {/* Атмосферный фон «пар и угли» — без фото */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-bg" />
+      <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-linear-to-t from-bg via-bg/70 to-bg/30"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(125%_85%_at_50%_118%,rgba(194,84,42,0.22),transparent_60%)]"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-radial from-ember/10 via-transparent to-transparent"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(70%_55%_at_82%_6%,rgba(201,138,58,0.12),transparent_70%)]"
       />
       <div
         aria-hidden="true"
-        className="steam-layer pointer-events-none absolute -top-1/4 left-1/4 -z-10 h-[60vh] w-[60vh] rounded-full bg-cream/5 blur-[120px]"
+        className="steam-layer pointer-events-none absolute left-1/4 top-[18%] -z-10 h-[55vh] w-[55vh] rounded-full bg-cream/[0.05] blur-[130px]"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-linear-to-t from-bg to-transparent"
       />
 
       <div className="relative w-full px-5 pb-16 pt-32 sm:px-8 sm:pb-24 lg:pb-28">

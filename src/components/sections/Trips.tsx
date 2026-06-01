@@ -18,7 +18,7 @@ export function Trips() {
       <RevealStagger className="mt-14 grid gap-6 lg:grid-cols-2" stagger={0.16}>
         {trips.items.map((trip) => {
           const img =
-            trip.id === "splav" ? media.trips.splav : media.trips.mountains;
+            trip.id === "splav" ? media.trips.splav : media.trips.banya;
           return (
             <RevealItem key={trip.id}>
               <article className="group relative flex min-h-[30rem] flex-col justify-end overflow-hidden rounded-card surface-card">

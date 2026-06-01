@@ -73,8 +73,8 @@ export function Contact() {
             {contactCopy.directTitle}
           </h3>
           <ContactRow icon={PhoneIcon} label="Телефон" value={site.contacts.phone.display} href={site.contacts.phone.href} />
-          <ContactRow icon={TgIcon} label={site.contacts.telegram.label} value={site.contacts.telegram.handle} href={site.contacts.telegram.href} />
-          <ContactRow icon={MaxIcon} label={site.contacts.max.label} value={site.contacts.max.display} href={site.contacts.max.href} />
+          <ContactRow icon={TgIcon} label={site.social.telegramChannel.label} value={site.social.telegramChannel.handle} href={site.social.telegramChannel.href} />
+          <ContactRow icon={MaxIcon} label={site.social.vk.label} value={site.social.vk.handle} href={site.social.vk.href} />
 
           {/* Карта / гео */}
           <div className="mt-2 overflow-hidden rounded-2xl border border-line">

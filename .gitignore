@@ -54,3 +54,6 @@ next-env.d.ts
 # static export для GitHub Pages
 /.next-export/
 /out/
+
+# исходные фото от клиента (обрабатываются в public/images)
+/source-photos/
