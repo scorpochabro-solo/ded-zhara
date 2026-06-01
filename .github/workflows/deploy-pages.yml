@@ -27,10 +27,6 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - name: Включить GitHub Pages (если ещё не включён)
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - run: npm ci --ignore-scripts
       - name: Убрать серверные роуты (Pages = только статика/дизайн)
         run: rm -rf app/admin app/api
