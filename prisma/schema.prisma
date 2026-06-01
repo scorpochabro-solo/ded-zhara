@@ -1,0 +1,39 @@
+// Схема базы данных «Дед&Жара» — мини-CRM для заявок на парение.
+// Документация: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  // По умолчанию — SQLite (ноль настройки, запускается локально сразу).
+  // Для production (Vercel/VPS) поменяй provider на "postgresql".
+  // Строка подключения (DATABASE_URL) в Prisma 7 задаётся в
+  // prisma.config.ts (для CLI/миграций) и в src/lib/db.ts через
+  // driver-адаптер (для рантайма). Подробности — в README.
+  provider = "sqlite"
+}
+
+/// Заявка с сайта (запись на парение или на выезд).
+model Lead {
+  id            String   @id @default(cuid())
+  name          String
+  phone         String
+  /// Предпочтительный канал связи: phone | telegram | max
+  channel       String
+  /// Услуга: classic | ritual | gift | trip
+  service       String
+  /// Желаемая дата (строка как выбрал пользователь), необязательно
+  preferredDate String?
+  comment       String?
+  /// Статус в воронке: new | in_progress | booked | done | rejected
+  status        String   @default("new")
+  /// Источник заявки (на будущее: site, instagram, ...)
+  source        String   @default("site")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}

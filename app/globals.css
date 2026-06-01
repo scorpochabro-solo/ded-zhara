@@ -1,26 +1,239 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ════════════════════════════════════════════════════════════════
+   ДЕД&ЖАРА — дизайн-система «Пар и дуб»
+   Тёмная атмосферная база · тёплые живые акценты (медь, уголь, дуб).
+   Токены ниже доступны как утилиты Tailwind (bg-bg, text-copper, …)
+   и как CSS-переменные (var(--color-copper)).
+   ════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* — Базовые поверхности — */
+  --color-bg: #16120e;
+  --color-bg-deep: #100c09;
+  --color-surface: #211b14;
+  --color-surface-2: #2b2319;
+  --color-surface-3: #352a1d;
+
+  /* — Дерево / дуб — */
+  --color-wood: #8a5a2b;
+  --color-wood-light: #a6713b;
+
+  /* — Акценты (огонь, медь, уголь) — */
+  --color-copper: #c98a3a;
+  --color-copper-bright: #e3aa57;
+  --color-ember: #c2542a;
+  --color-ember-bright: #db6230;
+
+  /* — Лист / хвоя — */
+  --color-leaf: #3c4a32;
+  --color-leaf-light: #5d6e49;
+
+  /* — Текст по тёмному — */
+  --color-cream: #ede6d8;
+  --color-muted: #b7ad9c;
+  --color-faint: #8a8073;
+
+  /* — Линии / границы — */
+  --color-line: rgba(237, 230, 216, 0.1);
+  --color-line-strong: rgba(237, 230, 216, 0.18);
+
+  /* — Шрифты (подключаются в layout.tsx через next/font, кириллица) — */
+  --font-display: var(--font-cormorant), "Georgia", serif;
+  --font-body: var(--font-golos), system-ui, sans-serif;
+
+  /* — Тени и свечения — */
+  --shadow-warm: 0 30px 80px -28px rgba(0, 0, 0, 0.8);
+  --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.3), 0 24px 60px -32px rgba(0, 0, 0, 0.85);
+  --shadow-ember: 0 0 0 1px rgba(201, 138, 58, 0.28),
+    0 18px 50px -16px rgba(194, 84, 42, 0.5);
+
+  /* — Плавность — */
+  --ease-warm: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* — Радиусы — */
+  --radius-card: 1.25rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ─────────────────────────  БАЗА  ───────────────────────── */
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: dark;
+  }
+
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-cream);
+    font-family: var(--font-body);
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Тёплое «угольное» свечение в фоне всего сайта */
+    background-image:
+      radial-gradient(70% 50% at 50% -10%, rgba(194, 84, 42, 0.12), transparent 60%),
+      radial-gradient(50% 40% at 85% 8%, rgba(201, 138, 58, 0.08), transparent 70%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-ember);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-copper-bright);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Скроллбар в тон бане */
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-deep);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-wood);
+    border-radius: 999px;
+    border: 3px solid var(--color-bg-deep);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-wood-light);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ───────────────────────  УТИЛИТЫ  ─────────────────────── */
+
+/* Зерно плёнки поверх всего — даёт «фактуру», уводит от плоского AI-лендинга */
+@utility grain {
+  position: relative;
+}
+@utility grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Тёплая медная «надпечатка» для заголовков-акцентов */
+@utility text-ember-gradient {
+  background: linear-gradient(
+    100deg,
+    var(--color-copper-bright),
+    var(--color-ember) 65%,
+    var(--color-wood-light)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Тонкая «дровяная» разделительная линия с медным огоньком */
+@utility rule-ember {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-line-strong) 18%,
+    var(--color-copper) 50%,
+    var(--color-line-strong) 82%,
+    transparent
+  );
+}
+
+/* Стеклянно-дымчатая поверхность карточек */
+@utility surface-card {
+  background: linear-gradient(
+    160deg,
+    color-mix(in oklab, var(--color-surface-2), white 3%),
+    var(--color-surface)
+  );
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-card);
+}
+
+/* Лёгкий «пар» — мягкое радиальное свечение, ставим в фон секций */
+@utility steam-glow {
+  background: radial-gradient(
+    60% 60% at 50% 40%,
+    rgba(237, 230, 216, 0.07),
+    transparent 70%
+  );
+}
+
+/* Анимированное тление для CTA */
+@utility ember-pulse {
+  animation: ember-pulse 4.5s var(--ease-warm) infinite;
+}
+
+@keyframes ember-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 1px rgba(201, 138, 58, 0.3),
+      0 14px 40px -16px rgba(194, 84, 42, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 1px rgba(227, 170, 87, 0.5),
+      0 18px 56px -14px rgba(219, 98, 48, 0.65);
+  }
+}
+
+/* Медленный дрейф пара (фоновые слои hero) */
+@keyframes steam-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate3d(2%, -3%, 0) scale(1.06);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.5;
+  }
+}
+@utility steam-layer {
+  animation: steam-drift 16s ease-in-out infinite;
+}
+
+/* Уважение к prefers-reduced-motion для всех ambient-анимаций */
+@media (prefers-reduced-motion: reduce) {
+  .ember-pulse,
+  .steam-layer {
+    animation: none !important;
+  }
 }
