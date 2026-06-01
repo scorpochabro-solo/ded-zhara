@@ -20,6 +20,7 @@ const golos = Golos_Text({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const ogImage = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/images/og.jpg`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
       "Живой русский ритуал парения веником от пармастера. Балахна · Нижний Новгород. Парения, сертификаты, выезды и сплавы с баней.",
     images: [
       {
-        url: "/images/og.jpg",
+        url: ogImage,
         width: 1200,
         height: 630,
         alt: "Дед&Жара — парение веником",
@@ -67,7 +68,7 @@ export const metadata: Metadata = {
     title: `${site.brand} — парение, которое возвращает силы`,
     description:
       "Живой русский ритуал парения веником от пармастера. Балахна · Нижний Новгород.",
-    images: ["/images/og.jpg"],
+    images: [ogImage],
   },
   robots: {
     index: true,

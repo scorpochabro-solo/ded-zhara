@@ -38,6 +38,7 @@ jobs:
           NEXT_PUBLIC_DEMO: "true"
           NEXT_TELEMETRY_DISABLED: "1"
           PAGES_BASE_PATH: "/${{ github.event.repository.name }}"
+          NEXT_PUBLIC_BASE_PATH: "/${{ github.event.repository.name }}"
           NEXT_PUBLIC_SITE_URL: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
         run: npx next build
       - name: Защита от Jekyll (чтобы папка _next не игнорировалась)
