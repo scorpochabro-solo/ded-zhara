@@ -28,6 +28,7 @@ export function Trips() {
                   alt={img.alt}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
+                  style={{ objectPosition: img.pos }}
                   className="object-cover transition-transform duration-[1.1s] ease-warm group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-bg via-bg/55 to-bg/5" />

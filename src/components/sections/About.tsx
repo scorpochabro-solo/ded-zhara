@@ -22,6 +22,7 @@ export function About() {
               alt={media.about.alt}
               fill
               sizes="(max-width: 1024px) 100vw, 40vw"
+              style={{ objectPosition: media.about.pos }}
               className="object-cover"
             />
             <div className="absolute inset-0 bg-linear-to-t from-bg/50 to-transparent" />

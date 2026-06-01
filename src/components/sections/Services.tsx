@@ -59,6 +59,7 @@ export function Services() {
                 alt={programImg(featured.id).alt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
+                style={{ objectPosition: programImg(featured.id).pos }}
                 className="object-cover transition-transform duration-700 ease-warm group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-surface/80 via-transparent to-transparent lg:bg-linear-to-r" />
@@ -99,6 +100,7 @@ export function Services() {
                     alt={programImg(s.id).alt}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
+                    style={{ objectPosition: programImg(s.id).pos }}
                     className="object-cover transition-transform duration-700 ease-warm group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-surface/90 via-surface/20 to-transparent" />
