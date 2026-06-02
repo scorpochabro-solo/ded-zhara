@@ -3,6 +3,7 @@ import { leadSchema } from "@/lib/validation";
 import { prisma } from "@/lib/db";
 import { sendTelegramNotification } from "@/lib/telegram";
 import { notifyByEmail } from "@/lib/email";
+import { addToYandexCalendar } from "@/lib/calendar";
 import { checkRateLimit } from "@/lib/rate-limit";
 
 // Нужен Node-рантайм (better-sqlite3 / node:crypto), без статической оптимизации.
@@ -64,6 +65,7 @@ export async function POST(req: NextRequest) {
         channel: data.channel,
         service: data.service,
         preferredDate: data.preferredDate || null,
+        preferredTime: data.preferredTime || null,
         comment: data.comment || null,
         source: "site",
       },
@@ -81,6 +83,7 @@ export async function POST(req: NextRequest) {
       channel: data.channel,
       service: data.service,
       preferredDate: data.preferredDate,
+      preferredTime: data.preferredTime,
       comment: data.comment,
     }),
     notifyByEmail({
@@ -89,6 +92,15 @@ export async function POST(req: NextRequest) {
       channel: data.channel,
       service: data.service,
       preferredDate: data.preferredDate,
+      comment: data.comment,
+    }),
+    addToYandexCalendar({
+      name: data.name,
+      phone: data.phone,
+      channel: data.channel,
+      service: data.service,
+      preferredDate: data.preferredDate,
+      preferredTime: data.preferredTime,
       comment: data.comment,
     }),
   ]);

@@ -46,6 +46,7 @@ export const leadSchema = z.object({
   channel: z.enum(CHANNELS),
   service: z.enum(SERVICES),
   preferredDate: z.string().trim().max(40).optional(),
+  preferredTime: z.string().trim().max(10).optional(),
   comment: z.string().trim().max(1000, "Слишком длинный комментарий").optional(),
   consent: z
     .boolean()

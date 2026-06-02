@@ -49,6 +49,7 @@ export function LeadForm() {
     channel: "phone" as Channel,
     service: "individual" as ServiceKind,
     preferredDate: "",
+    preferredTime: "",
     comment: "",
     consent: false,
     company: "", // honeypot
@@ -114,6 +115,7 @@ export function LeadForm() {
       channel: "phone",
       service: "individual",
       preferredDate: "",
+      preferredTime: "",
       comment: "",
       consent: false,
       company: "",
@@ -224,34 +226,44 @@ export function LeadForm() {
               </div>
             </fieldset>
 
-            {/* Услуга + дата */}
-            <div className="grid gap-5 sm:grid-cols-2">
-              <Field label="Что интересует" error={errors.service} htmlFor="service">
-                <div className="relative">
-                  <select
-                    id="service"
-                    value={form.service}
-                    onChange={(e) => update({ service: e.target.value as ServiceKind })}
-                    className={cn(fieldBase, "appearance-none pr-10")}
-                  >
-                    {SERVICES.map((s) => (
-                      <option key={s} value={s} className="bg-surface text-cream">
-                        {SERVICE_LABELS[s]}
-                      </option>
-                    ))}
-                  </select>
-                  <svg viewBox="0 0 24 24" fill="none" className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-faint">
-                    <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-              </Field>
+            {/* Услуга */}
+            <Field label="Что интересует" error={errors.service} htmlFor="service">
+              <div className="relative">
+                <select
+                  id="service"
+                  value={form.service}
+                  onChange={(e) => update({ service: e.target.value as ServiceKind })}
+                  className={cn(fieldBase, "appearance-none pr-10")}
+                >
+                  {SERVICES.map((s) => (
+                    <option key={s} value={s} className="bg-surface text-cream">
+                      {SERVICE_LABELS[s]}
+                    </option>
+                  ))}
+                </select>
+                <svg viewBox="0 0 24 24" fill="none" className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-faint">
+                  <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </Field>
 
+            {/* Желаемые дата и время */}
+            <div className="grid gap-5 sm:grid-cols-2">
               <Field label="Желаемая дата" htmlFor="date" optional>
                 <input
                   id="date"
                   type="date"
                   value={form.preferredDate}
                   onChange={(e) => update({ preferredDate: e.target.value })}
+                  className={cn(fieldBase, "[color-scheme:dark]")}
+                />
+              </Field>
+              <Field label="Желаемое время" htmlFor="time" optional>
+                <input
+                  id="time"
+                  type="time"
+                  value={form.preferredTime}
+                  onChange={(e) => update({ preferredTime: e.target.value })}
                   className={cn(fieldBase, "[color-scheme:dark]")}
                 />
               </Field>

@@ -11,6 +11,7 @@ type NotifyPayload = {
   channel: Channel;
   service: ServiceKind;
   preferredDate?: string | null;
+  preferredTime?: string | null;
   comment?: string | null;
 };
 
@@ -53,9 +54,9 @@ export async function sendTelegramNotification(
     `<b>Телефон:</b> ${escapeHtml(lead.phone)}`,
     `<b>Связь:</b> ${CHANNEL_LABELS[lead.channel]}`,
     `<b>Услуга:</b> ${SERVICE_LABELS[lead.service]}`,
-    `<b>Дата:</b> ${lead.preferredDate ? escapeHtml(lead.preferredDate) : "—"}`,
+    `<b>Желаемое:</b> ${lead.preferredDate ? escapeHtml(lead.preferredDate) : "—"}${lead.preferredTime ? " в " + escapeHtml(lead.preferredTime) : ""}`,
     `<b>Комментарий:</b> ${lead.comment ? escapeHtml(lead.comment) : "—"}`,
-    `<b>Время:</b> ${nowMsk()}`,
+    `<b>Отправлено:</b> ${nowMsk()}`,
   ];
 
   try {

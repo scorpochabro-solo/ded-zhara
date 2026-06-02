@@ -171,7 +171,7 @@ export default async function AdminPage({
                   {SERVICE_LABELS[l.service as ServiceKind] ?? l.service}
                 </td>
                 <td className="whitespace-nowrap px-4 py-3 text-muted">
-                  {l.preferredDate || "—"}
+                  {[l.preferredDate, l.preferredTime].filter(Boolean).join(" · ") || "—"}
                 </td>
                 <td className="max-w-[16rem] px-4 py-3 text-muted">
                   <span className="line-clamp-2" title={l.comment ?? ""}>

@@ -22,10 +22,12 @@ model Lead {
   phone         String
   /// Предпочтительный канал связи: phone | telegram | max
   channel       String
-  /// Услуга: classic | ritual | gift | trip
+  /// Услуга: group | individual | spa | trip
   service       String
-  /// Желаемая дата (строка как выбрал пользователь), необязательно
+  /// Желаемая дата (YYYY-MM-DD), необязательно
   preferredDate String?
+  /// Желаемое время (HH:MM), необязательно
+  preferredTime String?
   comment       String?
   /// Статус в воронке: new | in_progress | booked | done | rejected
   status        String   @default("new")

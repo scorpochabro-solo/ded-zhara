@@ -26,6 +26,7 @@ type CsvLead = {
   channel: string;
   service: string;
   preferredDate: string | null;
+  preferredTime: string | null;
   comment: string | null;
   status: string;
   source: string;
@@ -48,6 +49,7 @@ export function leadsToCsv(leads: CsvLead[]): string {
     "Связь",
     "Услуга",
     "Желаемая дата",
+    "Желаемое время",
     "Комментарий",
     "Статус",
     "Источник",
@@ -61,6 +63,7 @@ export function leadsToCsv(leads: CsvLead[]): string {
       label(CHANNEL_LABELS as Record<Channel, string>, l.channel),
       label(SERVICE_LABELS as Record<ServiceKind, string>, l.service),
       l.preferredDate ?? "",
+      l.preferredTime ?? "",
       l.comment ?? "",
       label(STATUS_LABELS as Record<LeadStatus, string>, l.status),
       l.source,
