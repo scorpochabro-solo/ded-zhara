@@ -54,6 +54,9 @@ export const media = {
     banya: { src: p("/images/vyezd-banya.jpg"), alt: "Выездная мобильная баня с гостями на природе", width: 1100, height: 1467, pos: "center 35%" } as Media,
   },
 
+  // Авторский тур в Мезмай (горы Кавказа).
+  mezmai: { src: p("/images/mezmai-2.jpg"), alt: "Группа на вершине — авторский тур в Мезмай", width: 900, height: 1200, pos: "center 30%" } as Media,
+
   // Галерея (масонри — без обрезки, фото целиком).
   gallery: [
     { src: p("/images/hero.jpg"), alt: "Сергей с пихтовыми вениками у бани", width: 1920, height: 1440 },
@@ -62,6 +65,8 @@ export const media = {
     { src: p("/images/na-beregu.jpg"), alt: "Мобильная баня на берегу реки", width: 640, height: 858 },
     { src: p("/images/vyezd-splav.jpg"), alt: "Сплав по реке", width: 1280, height: 853 },
     { src: p("/images/camp.jpg"), alt: "Лагерь в сосновом лесу на выезде", width: 1280, height: 853 },
+    { src: p("/images/mezmai-1.jpg"), alt: "Орлиная полка, Мезмай — горы Кавказа", width: 560, height: 757 },
+    { src: p("/images/mezmai-3.jpg"), alt: "Альпийский луг на плато Лаго-Наки", width: 900, height: 1200 },
   ] as Media[],
 
   video: {
